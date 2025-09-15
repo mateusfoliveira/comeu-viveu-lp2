@@ -13,9 +13,6 @@ public class Pedido {
 	public static int getNumeroPedidos() {
 		return numeroPedidos;
 	}
-	public static void setNumeroPedidos(int numeroPedidos) {
-		Pedido.numeroPedidos = numeroPedidos;
-	}
 	
 	public int getNumero() {
 		return numero;
@@ -59,9 +56,23 @@ public class Pedido {
 		for(Item item: itens) {
 			System.out.println("- " + item.getNome() + " R$: " + item.getPreco());
 		}
+		if(getItens().isEmpty()) System.out.println("A lista de itens está vazia. \n (Não foram registrados)");
 		//Fim da lista
 		System.out.println("______________________________");
 		
+		System.out.println("Total: R$ " + totalItens());
+		
+	}
+	
+	public double totalItens(){
+		
+		double total = 0;
+		
+		for(Item item : itens) {
+			total += item.getPreco();
+		}
+		
+		return total;
 	}
 	
 	public Pedido(String cliente) {
