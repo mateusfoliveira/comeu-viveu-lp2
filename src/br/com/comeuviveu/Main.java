@@ -1,18 +1,25 @@
 package br.com.comeuviveu;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
 
 	public static void main(String[] args) {
 		
+		System.out.println ("bem vindo ao programa do comeu viveu");
 		
-		menu();
+		ArrayList <Pedido> pedidos = new ArrayList <>();
+		
+		menu(pedidos);
 				
 
 	}
 	
-	public static void menu(){
+	public static void menu(ArrayList <Pedido> pedidos){
+		
+		System.out.println("Escolha uma das opções: ");
+		System.out.println(" 1 - Adicionar pedido\n 2 - Remover pedido \n 3 - Listar pedidos\n 4 - Encerrar o programa");
 		
 		Scanner Scanner = new Scanner(System.in);
 		
@@ -21,11 +28,12 @@ public class Main {
 		while (entrada != 4) {
 			
 			entrada = Scanner.nextInt();
-			Scanner.next();
+			Scanner.nextLine();
 			
 			switch(entrada){
 			//Registrar pedido
 				case 1:
+
 					break;
 			//Remover
 				case 2:
@@ -35,6 +43,7 @@ public class Main {
 					break;
 			//Exit
 				case 4:
+					System.out.println("Encerrando a execução do programa.");
 					Scanner.close();
 					return;
 			
