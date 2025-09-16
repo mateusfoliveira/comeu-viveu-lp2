@@ -34,8 +34,8 @@ public class Sistema {
 			System.out.println("\n========================================");
 			System.out.println(" Restaurante 'Comeu? Viveu!' ");
 			System.out.println("========================================");
-			System.out.println("Pedido N°: " + novoPedido.getNumero());
-			System.out.println("Cliente: " + novoPedido.getCliente());
+			System.out.println(" Pedido N°: " + novoPedido.getNumero());
+			System.out.println(" Cliente: " + novoPedido.getCliente());
 			novoPedido.showItens();
 			System.out.println("========================================");
 			System.out.println(" Obrigado pela preferência! :) ");
@@ -45,6 +45,69 @@ public class Sistema {
 			
 		}
 	}
+	
+	public void removePedido(Scanner scanner){
+		
+		if(pedidos.isEmpty()){
+			System.out.println("Não existem pedidos na lista para serem removidos!\n");
+			return;
+		}
+		
+		System.out.println("Escreva o número do pedido a ser removido: ");
+		int index = scanner.nextInt();
+		if(index > 0 && index <= pedidos.size())pedidos.remove(index - 1);
+		else {
+			System.out.println("Número escolhido inválido! Encerrando remoção de pedidos.");
+			return;
+		}
+		System.out.println("Pedido removido!");
+		if(pedidos.isEmpty()) {
+			System.out.println("A lista agora está vazia. Encerrando remoção de pedidos!\n");
+			return;
+		}
+		
+		System.out.println("Deseja remover mais algum pedido?\n 1 - Sim\n 2 - Não");
+		
+		int entrada = scanner.nextInt();
+		switch(entrada) {
+			case 1:
+				removePedido(scanner);
+				break;
+		
+			case 2:
+				System.out.println("Fim da remoção de pedidos!");
+				break;
+			
+			default:
+				System.out.println("Opção inválida! Encerrando remoção de pedidos.");
+				
+		}
+
+		
+		
+	}
+	
+	public void showPedidos(){
+		
+		if(pedidos.isEmpty()){
+			System.out.println("A lista de pedidos está vazia!\n");
+			return;
+		}
+		
+		System.out.println("\n========================================");
+		System.out.println(" Listas de pedidos: ");
+		
+		System.out.println("========================================");
+		
+		for(Pedido pedido:pedidos){
+			System.out.println(" Pedido N°: " + pedido.getNumero());
+			System.out.println(" Cliente: " + pedido.getCliente());
+			pedido.showItens();
+			System.out.println("========================================");
+		}
+		System.out.println(" Fim da lista de pedidos.");
+		System.out.println("========================================\n");
+	}
 
 	public void menu(){
 		
@@ -52,7 +115,7 @@ public class Sistema {
 		
 		int entrada = 0;
 		
-		System.out.println ("Bem vindo ao programa do 'Comeu? Viveu!'");
+		System.out.println ("Bem vindo ao programa do 'Comeu? Viveu!'\n");
 		
 		while (entrada != 4) {
 			
@@ -69,13 +132,15 @@ public class Sistema {
 					break;
 			//Remover
 				case 2:
+					removePedido(scanner);
 					break;
 			//Listar
 				case 3:
+					showPedidos();
 					break;
 			//Exit
 				case 4:
-					System.out.println("Encerrando a execução do programa.");
+					System.out.println("Programa encerrado.");
 					scanner.close();
 					return;
 			
