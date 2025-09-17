@@ -36,6 +36,7 @@ public class Pedido {
 	public void addItem(Scanner Scanner){
 		
 		System.out.println("Digite os itens, um por vez, nome e preço. Quando terminar escreva 'end'.");
+		System.out.println("-------------------------------------------------------------------------");
 		
 		String entradaNome = "Vazio";
 		
@@ -48,6 +49,7 @@ public class Pedido {
 		}
 		
 		System.out.println("Itens adicionados com sucesso!");
+		System.out.println("------------------------------");
 	}
 	
 	public void showItens() {
@@ -56,7 +58,12 @@ public class Pedido {
 		for(Item item: itens) {
 			System.out.println("- " + item.getNome() + " R$: " + item.getPreco());
 		}
-		if(getItens().isEmpty()) System.out.println("A lista de itens está vazia. \n (Não foram registrados)");
+		if(getItens().isEmpty()){
+			System.out.println("A lista de itens está vazia.\n");
+			System.out.println("----------------------------");
+			System.out.println(" (Não foram registrados)");
+			System.out.println(" -----------------------");
+		}
 		//Fim da lista
 		System.out.println("______________________________");
 		
@@ -81,8 +88,4 @@ public class Pedido {
 		this.cliente = cliente;
 		this.itens = new ArrayList<Item>();
 	}
-
-	
-	
-
 }
