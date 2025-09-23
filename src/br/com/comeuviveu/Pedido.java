@@ -1,6 +1,7 @@
 package br.com.comeuviveu;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Pedido {
@@ -33,21 +34,41 @@ public class Pedido {
 		this.itens = itens;
 	}
 	
-	public void addItem(Scanner Scanner){
-		
+	public void addItem(Scanner scanner){
+		System.out.println("-------------------------------------------------------------------------");
 		System.out.println("Digite os itens, um por vez, nome e preço. Quando terminar escreva 'end'.");
 		System.out.println("-------------------------------------------------------------------------");
 		
 		String entradaNome = "Vazio";
 		
-		while(true) {
-			entradaNome = Scanner.nextLine();
-			if(entradaNome.equalsIgnoreCase("end")) break;
-			double entradaPrice = Scanner.nextDouble();
-			Scanner.nextLine();
-			getItens().add(new Item(entradaNome, entradaPrice));
-		}
+		int contador = 1;
 		
+		while(true) {
+			System.out.println("-------------");
+			System.out.println("Item " + contador + "(nome)" + ":");
+			System.out.println("-------------");
+			
+			entradaNome = scanner.nextLine();
+			
+			if(entradaNome.equalsIgnoreCase("end")) break;
+			
+			System.out.println("--------------");
+			System.out.println("Preço do item:");
+			System.out.println("--------------");
+			double entradaPrice = 0;
+			try {
+				entradaPrice = scanner.nextDouble();
+			}catch(InputMismatchException erro1){
+				System.out.println("--------------------------------------------");
+				System.out.println("Erro, entrada inválida! Adicionando preço 0.");
+				System.out.println("--------------------------------------------");
+				entradaPrice = 0;
+			}
+			scanner.nextLine();
+			getItens().add(new Item(entradaNome, entradaPrice));
+			contador++;
+		}
+		System.out.println("------------------------------");
 		System.out.println("Itens adicionados com sucesso!");
 		System.out.println("------------------------------");
 	}
